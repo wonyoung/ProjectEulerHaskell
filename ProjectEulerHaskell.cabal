@@ -9,5 +9,8 @@ executable ProjectEulerHaskell
   main-is:         Main.hs
   build-depends:   base >= 4
   ghc-options:     -Wall
-  other-modules:   Problem64
+  other-modules:   
+                   Problem64,
+                   Example.ArrowExam1,
+                   Example.ArrowTutorial
 

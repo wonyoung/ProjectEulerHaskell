@@ -29,7 +29,7 @@ showFloat = flip (++) "%" . flip (Numeric.showFFloat (Just 1)) "" . (*) 100
 
 runningPrograms :: (Integer) -> [(String, Integer, Integer, Integer)] -> [(String, Float)]
 runningPrograms when = (map (\(n,s,e,u) -> (n,fromInteger u / fromInteger (e - s))) . 
-        filter (\(n,s,e,u) -> inRange (s,e-1) when))
+        filter (\(_,s,e,_) -> inRange (s,e-1) when))
 
 calcUsage :: [(String, Float)] -> [(String, Float)]
 calcUsage programs = map (\(name, usage) -> (name, usage / totalUsages)) programs
@@ -39,7 +39,7 @@ sortUsage :: [(String, Float)] -> [(String, Float)]
 sortUsage = map swap . reverse . sortBy singleComparer . map swap . sortBy singleComparer
 
 singleComparer :: Ord a => (a, t) -> (a, t1) -> Ordering
-singleComparer (a, b) (c, d) = compare a c
+singleComparer (a, _) (c, _) = compare a c
 
 parseInput :: String -> [Integer]
 parseInput = (map read) . words . head . lines
